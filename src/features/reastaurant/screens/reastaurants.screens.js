@@ -8,15 +8,16 @@ const SafeArea = styled.SafeAreaView`
 flex: 1;
 `
 const RestaurantSearch = styled(View)`
- padding: 5px;
+ padding:  ${(props) => props.theme.space[1]};
 `
 
 const RestaurantList = styled(View)`
   flex: 1;
-  padding: 5px;
+  padding: ${(props) => props.theme.space[1]};
   background-color: blue;
 ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 `
+
 
 export const ReastaurantsScreen = () => {
     return (
