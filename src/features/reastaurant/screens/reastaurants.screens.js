@@ -6,6 +6,7 @@ import styled from 'styled-components/native';
 
 const SafeArea = styled.SafeAreaView`
 flex: 1;
+ ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 `
 const RestaurantSearch = styled(View)`
  padding:  ${(props) => props.theme.space[1]};
@@ -14,8 +15,7 @@ const RestaurantSearch = styled(View)`
 const RestaurantList = styled(View)`
   flex: 1;
   padding: ${(props) => props.theme.space[1]};
-  background-color: blue;
-${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
+  
 `
 
 
