@@ -12,14 +12,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from "@expo/vector-icons"
 
 const Tab = createBottomTabNavigator();
-const App = () => {
-    let [oswaldLoded] = useOswald({
-        Oswald_400Regular,
-    });
-    let [latoLoded] = useLato({
-        Lato_400Regular,
-    });
 
+const handleNavigationOptions = (route) => {
     const icons = {
         Restaurant: {
             focused: 'restaurant-outline',
@@ -35,6 +29,26 @@ const App = () => {
         },
     };
 
+    return {
+        tabBarIcon: ({ focused, color, size }) => {
+            const iconName = focused
+                ? icons[route.name].focused
+                : icons[route.name].default;
+
+            return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+    };
+}
+const App = () => {
+    let [oswaldLoded] = useOswald({
+        Oswald_400Regular,
+    });
+    let [latoLoded] = useLato({
+        Lato_400Regular,
+    });
+
 
     if (!oswaldLoded || !latoLoded) {
         return null;
@@ -42,19 +56,7 @@ const App = () => {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <Tab.Navigator screenOptions={({ route }) => {
-                    return {
-                        tabBarIcon: ({ focused, color, size }) => {
-                            const iconName = focused
-                                ? icons[route.name].focused
-                                : icons[route.name].default;
-
-                            return <Ionicons name={iconName} size={size} color={color} />;
-                        },
-                        tabBarActiveTintColor: 'tomato',
-                        tabBarInactiveTintColor: 'gray',
-                    };
-                }}>
+                <Tab.Navigator screenOptions={({ route }) => handleNavigationOptions(route)}>
                     <Tab.Screen name="Restaurant" component={ReastaurantsScreen} />
                     <Tab.Screen name="Map" component={() => <View><Text>I am map component</Text></View>} />
                     <Tab.Screen name="Settings" component={() => <View><Text>I am settings component</Text></View>} />
