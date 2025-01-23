@@ -13,14 +13,19 @@ export const RestaurantsContextProvider = ({ children }) => {
 
     const retriveRestraunts = async () => {
         setIsloading(true);
-        const restrauntResult = await restaurantsRequest();
-        console.log("restraunt result", restaurants)
-        setRestaurants(restrauntResult)
+        try {
+            const restaurantResult = await restaurantsRequest();
+            setRestaurants(restaurantResult);
+        } catch (err) {
+            setError(err.message || "An error occurred");
+        } finally {
+            setIsloading(false);
+        }
     }
 
     useEffect(() => { retriveRestraunts() }, [])
 
-    const value = { restaurants: restaurantsTransform(restaurants) };
+    const value = { restaurants: restaurantsTransform(restaurants), isLoading, error };
     return (
         <RestaurantsContext.Provider value={value}>
             {children}

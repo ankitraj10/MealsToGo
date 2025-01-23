@@ -37,8 +37,8 @@ margin-bottom: ${(props) => props.theme.space[5]};
 `
 
 export const ReastaurantsScreen = () => {
-    const restaurantContext = useContext(RestaurantsContext);
-    console.log("test 567", restaurantContext)
+    const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+
     return (
         <SafeArea  >
             <RestaurantSearch >
@@ -46,8 +46,11 @@ export const ReastaurantsScreen = () => {
             </RestaurantSearch>
             <RestaurantList >
                 <RestaurantFlatList
-                    data={restaurantContext.restaurants}
-                    renderItem={() => <><Spacer variant='bottom' size='large' /><RestaurantInfoCard /></>}
+                    data={restaurants}
+                    renderItem={(item) => {
+
+                        return <><Spacer variant='bottom' size='large' /><RestaurantInfoCard restaurant={item} /></>
+                    }}
                     keyExtractor={(item) => item.name}
 
                 />
