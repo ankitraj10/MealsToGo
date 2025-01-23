@@ -1,11 +1,26 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import { restaurantsRequest, restaurantsTransform } from "./restraunts.service";
 
-// Assuming restaurantsRequest and restaurantsTransform are used elsewhere, remove them if not needed
+
+
+
 export const RestaurantsContext = createContext();
 
 export const RestaurantsContextProvider = ({ children }) => {
-    const value = { restaurants: [1, 2, 4] }; // Replace with dynamic value if needed
+    const [restaurants, setRestaurants] = useState([]);
+    const [isLoading, setIsloading] = useState(false);
+    const [error, setError] = useState(null);
 
+    const retriveRestraunts = async () => {
+        setIsloading(true);
+        const restrauntResult = await restaurantsRequest();
+        console.log("restraunt result", restaurants)
+        setRestaurants(restrauntResult)
+    }
+
+    useEffect(() => { retriveRestraunts() }, [])
+
+    const value = { restaurants: restaurantsTransform(restaurants) };
     return (
         <RestaurantsContext.Provider value={value}>
             {children}

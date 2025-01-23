@@ -46,16 +46,7 @@ export const ReastaurantsScreen = () => {
             </RestaurantSearch>
             <RestaurantList >
                 <RestaurantFlatList
-                    data={[
-                        { name: 1 },
-                        { name: 2 },
-                        { name: 3 },
-                        { name: 4 },
-                        { name: 5 },
-                        { name: 6 },
-                        { name: 7 },
-                        { name: 8 }
-                    ]}
+                    data={restaurantContext.restaurants}
                     renderItem={() => <><Spacer variant='bottom' size='large' /><RestaurantInfoCard /></>}
                     keyExtractor={(item) => item.name}
 
