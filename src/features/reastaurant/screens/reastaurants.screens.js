@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, SafeAreaView, StatusBar, Platform, FlatList } from 'react-native';
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/reastaurant-info-card.component";
 import styled from 'styled-components/native';
 import { Spacer } from "../../../components/spacer.component";
-import { SafeArea } from "../../../components/utility/safe-area.component"
+import { SafeArea } from "../../../components/utility/safe-area.component";
+import { RestaurantsContext } from "../../../services/restraunts/restraunts.context"
 
 const RestaurantSearch = styled(View)`
  padding:  ${(props) => props.theme.space[1]};
@@ -36,6 +37,8 @@ margin-bottom: ${(props) => props.theme.space[5]};
 `
 
 export const ReastaurantsScreen = () => {
+    const restaurantContext = useContext(RestaurantsContext);
+    console.log("test 567", restaurantContext)
     return (
         <SafeArea  >
             <RestaurantSearch >
