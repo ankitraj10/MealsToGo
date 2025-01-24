@@ -13,6 +13,7 @@ export const RestaurantsContextProvider = ({ children }) => {
 
     const retriveRestraunts = async () => {
         setIsloading(true);
+
         try {
             const restaurantResult = await restaurantsRequest();
             setRestaurants(restaurantResult);
@@ -23,7 +24,7 @@ export const RestaurantsContextProvider = ({ children }) => {
         }
     }
 
-    useEffect(() => { retriveRestraunts() }, [])
+    useEffect(() => { setIsloading(true); setTimeout(() => retriveRestraunts(), 5000) }, [])
 
     const value = { restaurants: restaurantsTransform(restaurants), isLoading, error };
     return (

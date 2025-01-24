@@ -21,7 +21,6 @@ import {
 
 
 export const RestaurantInfoCard = ({ restaurant = {}, theme }) => {
-    console.log("date item 67", restaurant.item.isOpenNow)
     const {
         name,
         icon,

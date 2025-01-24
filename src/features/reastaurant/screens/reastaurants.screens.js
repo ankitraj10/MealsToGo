@@ -5,17 +5,23 @@ import { RestaurantInfoCard } from "../components/reastaurant-info-card.componen
 import styled from 'styled-components/native';
 import { Spacer } from "../../../components/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
-import { RestaurantsContext } from "../../../services/restraunts/restraunts.context"
+import { RestaurantsContext } from "../../../services/restraunts/restraunts.context";
+import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 
 const RestaurantSearch = styled(View)`
  padding:  ${(props) => props.theme.space[1]};
 `
 
 const RestaurantList = styled(View)`
- 
   padding: ${(props) => props.theme.space[1]};
+`
+
+const ActivityLoadingContainer = styled(View)`
+    flex:1;
+    justify-content:center;
 
 `
+
 const SearchBox = styled(Searchbar).attrs({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -38,6 +44,10 @@ margin-bottom: ${(props) => props.theme.space[5]};
 
 export const ReastaurantsScreen = () => {
     const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+
+    if (isLoading) {
+        return <ActivityLoadingContainer><ActivityIndicator animating={true} color={MD2Colors.red800} size={'large'} /></ActivityLoadingContainer>
+    }
 
     return (
         <SafeArea  >
