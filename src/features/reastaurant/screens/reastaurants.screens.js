@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, SafeAreaView, StatusBar, Platform, FlatList } from 'react-native';
+import { Search } from "../components/search.component"
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/reastaurant-info-card.component";
 import styled from 'styled-components/native';
@@ -7,6 +8,7 @@ import { Spacer } from "../../../components/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { RestaurantsContext } from "../../../services/restraunts/restraunts.context";
 import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+import { LocationContext } from "../../../services/location/location.context";
 
 const RestaurantSearch = styled(View)`
  padding:  ${(props) => props.theme.space[1]};
@@ -22,17 +24,7 @@ const ActivityLoadingContainer = styled(View)`
 
 `
 
-const SearchBox = styled(Searchbar).attrs({
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 4,
-})`
-    border-radius: 0px;
-    margin: 10px;
-    background-color: #fff;
-`;
+
 
 const RestaurantFlatList = styled(FlatList).attrs({
     contentContainerStyle: {
@@ -49,11 +41,11 @@ export const ReastaurantsScreen = () => {
         return <ActivityLoadingContainer><ActivityIndicator animating={true} color={MD2Colors.red800} size={'large'} /></ActivityLoadingContainer>
     }
 
+    const LocationData = useContext(LocationContext)
+
     return (
         <SafeArea  >
-            <RestaurantSearch >
-                <SearchBox placeholder="Search" />
-            </RestaurantSearch>
+            <Search data={LocationData} />
             <RestaurantList >
                 <RestaurantFlatList
                     data={restaurants}
