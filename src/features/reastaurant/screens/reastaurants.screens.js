@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { View, Text, SafeAreaView, StatusBar, Platform, FlatList } from 'react-native';
+import { View, FlatList, Pressable } from 'react-native';
 import { Search } from "../components/search.component"
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/reastaurant-info-card.component";
@@ -28,7 +28,7 @@ const RestaurantFlatList = styled(FlatList).attrs({
 margin-bottom: ${(props) => props.theme.space[5]};
 `
 
-export const ReastaurantsScreen = () => {
+export const ReastaurantsScreen = ({ navigation }) => {
     const { restaurants, isLoading, error, loadRestaurants } = useContext(RestaurantsContext);
     const LocationData = useContext(LocationContext)
 
@@ -49,7 +49,7 @@ export const ReastaurantsScreen = () => {
                 <RestaurantFlatList
                     data={restaurants}
                     renderItem={(item) => {
-                        return <><Spacer variant='bottom' size='large' /><RestaurantInfoCard restaurant={item} /></>
+                        return <Pressable onPress={() => navigation.navigate("RestrauntDetails")}><Spacer variant='bottom' size='large' /><RestaurantInfoCard restaurant={item} /></Pressable>
                     }}
                     keyExtractor={(item) => item.name}
 
