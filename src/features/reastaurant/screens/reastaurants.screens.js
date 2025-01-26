@@ -29,11 +29,11 @@ margin-bottom: ${(props) => props.theme.space[5]};
 `
 
 export const ReastaurantsScreen = () => {
-    const { restaurants, isLoading, error, retriveRestraunts } = useContext(RestaurantsContext);
+    const { restaurants, isLoading, error, loadRestaurants } = useContext(RestaurantsContext);
     const LocationData = useContext(LocationContext)
 
     useEffect(() => {
-        retriveRestraunts(LocationData.location);
+        loadRestaurants(LocationData.location);
     }, [LocationData.location])
 
     if (isLoading) {
@@ -49,7 +49,6 @@ export const ReastaurantsScreen = () => {
                 <RestaurantFlatList
                     data={restaurants}
                     renderItem={(item) => {
-
                         return <><Spacer variant='bottom' size='large' /><RestaurantInfoCard restaurant={item} /></>
                     }}
                     keyExtractor={(item) => item.name}
