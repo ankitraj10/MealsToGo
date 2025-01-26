@@ -27,7 +27,6 @@ export const Search = ({ data }) => {
     }, [])
 
     const loactionSearch = () => {
-        console.log("location searech", searchKeyword);
         search(searchKeyword)
     }
 

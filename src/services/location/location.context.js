@@ -13,15 +13,17 @@ export const LocationContextProvider = ({ children }) => {
     const [keyword, setKeyword] = useState("san francisco")
 
     const onSearch = async (searchKeyWord) => {
+        const searchTerm = searchKeyWord || keyword;
         setIsloading(true);
         setKeyword(searchKeyWord);
 
-        if (searchKeyWord.length == 0 || keyword.length == 0) {
+        if (searchTerm.length == 0) {
             return;
         }
 
         try {
-            const locationResult = await locationRequest(searchKeyWord || keyword);
+
+            const locationResult = await locationRequest(searchTerm);
             if (locationResult) {
                 setLocation(locationTransform(locationResult));
                 setIsloading(false)

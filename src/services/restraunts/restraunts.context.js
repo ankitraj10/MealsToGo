@@ -11,12 +11,11 @@ export const RestaurantsContextProvider = ({ children }) => {
     const [restaurants, setRestaurants] = useState([]);
     const [isLoading, setIsloading] = useState(false);
     const [error, setError] = useState(null);
-    const { location } = useContext(LocationContext)
+    const { location } = useContext(LocationContext);
 
     const retriveRestraunts = async () => {
         const locationString = `${location.lat},${location.lng}`
         setIsloading(true);
-
         try {
             const restaurantResult = await restaurantsRequest(locationString);
             setRestaurants(restaurantResult);
@@ -32,7 +31,7 @@ export const RestaurantsContextProvider = ({ children }) => {
         setTimeout(() => retriveRestraunts(), 2000)
     }, [])
 
-    const value = { restaurants: restaurantsTransform(restaurants), isLoading, error };
+    const value = { restaurants: restaurantsTransform(restaurants), isLoading, error, retriveRestraunts };
     return (
         <RestaurantsContext.Provider value={value}>
             {children}

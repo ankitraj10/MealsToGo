@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, SafeAreaView, StatusBar, Platform, FlatList } from 'react-native';
 import { Search } from "../components/search.component"
 import { Searchbar } from "react-native-paper";
@@ -10,10 +10,6 @@ import { RestaurantsContext } from "../../../services/restraunts/restraunts.cont
 import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 import { LocationContext } from "../../../services/location/location.context";
 
-const RestaurantSearch = styled(View)`
- padding:  ${(props) => props.theme.space[1]};
-`
-
 const RestaurantList = styled(View)`
   padding: ${(props) => props.theme.space[1]};
 `
@@ -24,8 +20,6 @@ const ActivityLoadingContainer = styled(View)`
 
 `
 
-
-
 const RestaurantFlatList = styled(FlatList).attrs({
     contentContainerStyle: {
         padding: 10
@@ -35,13 +29,18 @@ margin-bottom: ${(props) => props.theme.space[5]};
 `
 
 export const ReastaurantsScreen = () => {
-    const { restaurants, isLoading, error } = useContext(RestaurantsContext);
+    const { restaurants, isLoading, error, retriveRestraunts } = useContext(RestaurantsContext);
+    const LocationData = useContext(LocationContext)
+
+    useEffect(() => {
+        retriveRestraunts(LocationData.location);
+    }, [LocationData.location])
 
     if (isLoading) {
         return <ActivityLoadingContainer><ActivityIndicator animating={true} color={MD2Colors.red800} size={'large'} /></ActivityLoadingContainer>
     }
 
-    const LocationData = useContext(LocationContext)
+
 
     return (
         <SafeArea  >
