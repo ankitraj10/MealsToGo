@@ -21,6 +21,7 @@ import {
 
 
 export const RestaurantInfoCard = ({ restaurant = {}, theme }) => {
+    // console.log("restaurant details data", restaurant)
     const {
         name,
         icon,

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { View, FlatList, Pressable } from 'react-native';
+import { View, FlatList, Pressable, TouchableOpacity } from 'react-native';
 import { Search } from "../components/search.component"
 import { Searchbar } from "react-native-paper";
 import { RestaurantInfoCard } from "../components/reastaurant-info-card.component";
@@ -48,8 +48,8 @@ export const ReastaurantsScreen = ({ navigation }) => {
             <RestaurantList >
                 <RestaurantFlatList
                     data={restaurants}
-                    renderItem={(item) => {
-                        return <Pressable onPress={() => navigation.navigate("RestrauntDetails")}><Spacer variant='bottom' size='large' /><RestaurantInfoCard restaurant={item} /></Pressable>
+                    renderItem={(item, index) => {
+                        return <TouchableOpacity onPress={() => navigation.navigate("RestrauntDetails", { restaurantsDetail: item, data: restaurants[index] })}><Spacer variant='bottom' size='large' /><RestaurantInfoCard restaurant={item} /></TouchableOpacity>
                     }}
                     keyExtractor={(item) => item.name}
 
