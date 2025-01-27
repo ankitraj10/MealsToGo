@@ -1,22 +1,21 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import { StyleSheet } from 'react-native';
-import { SafeArea } from "../../../components/utility/safe-area.component"
+import { SafeArea } from "../../../components/utility/safe-area.component";
+import styled from "styled-components";
+
+const MapContainer = styled(SafeArea)`
+    flex: 1;
+`
+
+const Map = styled(MapView)`
+    width: 100%;
+    height: 100%;
+`
 
 export const MapScreen = () => {
     return (
-        <SafeArea style={styles.container}>
-            <MapView style={styles.map} />
-        </SafeArea>
+        <MapContainer >
+            <Map />
+        </MapContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    map: {
-        width: '100%',
-        height: '100%',
-    },
-});
