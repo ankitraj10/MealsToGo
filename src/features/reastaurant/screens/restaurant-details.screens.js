@@ -9,7 +9,6 @@ export const RestaurantDetails = ({ route }) => {
     const [dinner, setDinner] = useState(false);
     const [drinks, setDrinks] = useState(false);
 
-    const handlePress = () => setExpanded(!expanded);
     const { restaurantsDetail } = route.params;
     return (
         <SafeArea >
