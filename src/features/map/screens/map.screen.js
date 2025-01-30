@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import MapView, { Marker, Callout } from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import styled from "styled-components";
 import { MapSearch } from "../component/search.component";
 import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantsContext } from "../../../services/restraunts/restraunts.context";
 import { Text, View } from "react-native";
+import { MapCallout } from "../component/map-callout.component"
 // import { Marker,Callout } from 'react-native-maps';
 
 const MapContainer = styled(SafeArea)`
@@ -17,10 +18,7 @@ const Map = styled(MapView)`
   height: 100%;
 `;
 
-const MapCallBackText = styled(Text)`
-  font-weight: 700;
-  color: red;
-`;
+
 
 export const MapScreen = () => {
     const { location } = useContext(LocationContext);
@@ -60,13 +58,7 @@ export const MapScreen = () => {
                             }}
                             pinColor="red"
                         >
-                            <Callout>
-                                <View>
-                                    <MapCallBackText style={{ fontWeight: "bold" }}>
-                                        {restaurant.name}
-                                    </MapCallBackText>
-                                </View>
-                            </Callout>
+                            <MapCallout restaurant={restaurant} />
                         </Marker>
                     );
                 })}
