@@ -5,6 +5,7 @@ import { ReastaurantsScreen } from "../../features/reastaurant/screens/reastaura
 import { View, Text } from "react-native";
 import { RestaurantNavigator } from "./restaurant.navigator";
 import { MapScreen } from "../../features/map/screens/map.screen";
+import { RestaurantDetails } from "../../features/reastaurant/screens/restaurant-details.screens";
 
 export const AppNavigator = () => {
     const Tab = createBottomTabNavigator();

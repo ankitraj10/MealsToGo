@@ -5,8 +5,9 @@ import styled from "styled-components";
 import { MapSearch } from "../component/search.component";
 import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantsContext } from "../../../services/restraunts/restraunts.context";
-import { Text, View } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import { MapCallout } from "../component/map-callout.component"
+import { Callout } from "react-native-maps";
 // import { Marker,Callout } from 'react-native-maps';
 
 const MapContainer = styled(SafeArea)`
@@ -20,7 +21,7 @@ const Map = styled(MapView)`
 
 
 
-export const MapScreen = () => {
+export const MapScreen = ({ navigation }) => {
     const { location } = useContext(LocationContext);
     const { restaurants = [] } = useContext(RestaurantsContext);
     const LocationData = useContext(LocationContext);
@@ -35,7 +36,7 @@ export const MapScreen = () => {
 
         setLatDelta(northeastLat - southwestLat);
     }, [location, viewport]);
-
+    console.log("Available Routes: ", navigation.getState());
     return (
         <>
             <MapSearch data={LocationData} />
@@ -48,6 +49,7 @@ export const MapScreen = () => {
                 }}
             >
                 {restaurants.map((restaurant) => {
+                    console.log("restaurant data to be passed 67", { item: restaurant })
                     return (
                         <Marker
                             key={restaurant.name}
@@ -57,8 +59,12 @@ export const MapScreen = () => {
                                 longitude: restaurant.geometry.location.lng,
                             }}
                             pinColor="red"
+
                         >
-                            <MapCallout restaurant={restaurant} />
+                            <Callout onPress={() => navigation.navigate("RestaurantDetails", { restaurantsDetail: { item: restaurant } })}>
+                                <MapCallout restaurant={restaurant} navigation={navigation}
+                                />
+                            </Callout>
                         </Marker>
                     );
                 })}

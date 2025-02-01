@@ -49,7 +49,9 @@ export const ReastaurantsScreen = ({ navigation }) => {
                 <RestaurantFlatList
                     data={restaurants}
                     renderItem={(item, index) => {
-                        return <TouchableOpacity onPress={() => navigation.navigate("RestrauntDetails", { restaurantsDetail: item, data: restaurants[index] })}><Spacer variant='bottom' size='large' /><RestaurantInfoCard restaurant={item} /></TouchableOpacity>
+                        console.log("restaurant data to be passed", item)
+                        console.log("restaurant data to be passed 23", restaurants[index])
+                        return <TouchableOpacity onPress={() => navigation.navigate("RestaurantDetails", { restaurantsDetail: item, data: restaurants[index] })}><Spacer variant='bottom' size='large' /><RestaurantInfoCard restaurant={item} /></TouchableOpacity>
                     }}
                     keyExtractor={(item) => item.name}
 

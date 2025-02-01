@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { Callout } from "react-native-maps";
+import { CompactRestaurantInfo } from "../../reastaurant/components/compact-restaurant-info.component";
 
 const MapCallBackText = styled(Text)`
   font-weight: 500;
@@ -24,14 +25,13 @@ const MapCallBackImage = styled(Image)`
   margin-bottom: 5px;
 `;
 
-export const MapCallout = ({ restaurant }) => {
-    console.log("photos", restaurant);
-    return (
-        <Callout tooltip>
-            <MapCallbackContainer>
-                <MapCallBackImage source={{ uri: restaurant.photos[0] }} />
-                <MapCallBackText>{restaurant.name}</MapCallBackText>
-            </MapCallbackContainer>
-        </Callout>
-    );
+export const MapCallout = ({ restaurant, navigation }) => {
+  console.log("photos", restaurant);
+  return (
+    // <Callout tooltip >
+    <MapCallbackContainer>
+      <CompactRestaurantInfo restaurant={restaurant} navigation={navigation} />
+    </MapCallbackContainer>
+    // </Callout>
+  );
 };
