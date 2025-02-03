@@ -19,7 +19,7 @@ const SearchBox = styled(Searchbar).attrs({
   background-color: #fff;
 `;
 
-export const Search = ({ data }) => {
+export const Search = ({ data, favouriteToggle, favouriteIsToggle }) => {
     const [searchKeyword, setSearchKeyword] = useState("");
     const { keyword, search } = data;
     useEffect(() => {
@@ -37,10 +37,11 @@ export const Search = ({ data }) => {
     return (
         <RestaurantSearch>
             <SearchBox
+                icon={favouriteToggle ? "heart" : "heart-outline"}
                 placeholder="Search"
                 value={searchKeyword}
                 onChangeText={setSearchKeyword}
-                onIconPress={() => loactionSearch()}
+                onIconPress={() => favouriteIsToggle()}
                 onSubmitEditing={() => loactionSearch()}
             />
         </RestaurantSearch>
