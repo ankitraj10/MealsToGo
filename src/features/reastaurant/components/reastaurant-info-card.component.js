@@ -3,6 +3,7 @@ import { View, Image } from "react-native";
 import { Card } from "react-native-paper";
 import styled from 'styled-components/native';
 import { SvgXml } from 'react-native-svg';
+import { Favorite } from "../../../components/favourite/favourite.component"
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 import { Spacer } from "../../../components/spacer.component";
@@ -21,7 +22,6 @@ import {
 
 
 export const RestaurantInfoCard = ({ restaurant = {}, theme }) => {
-    // console.log("restaurant details data", restaurant)
     const {
         name,
         icon,
@@ -38,6 +38,7 @@ export const RestaurantInfoCard = ({ restaurant = {}, theme }) => {
     return (
         <RestaurantCard elevation={2} >
             <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+            <Favorite restaurant={restaurant.item} />
             <Info>
                 <Text variant="label">{name}</Text>
                 <Section>

@@ -36,7 +36,6 @@ export const MapScreen = ({ navigation }) => {
 
         setLatDelta(northeastLat - southwestLat);
     }, [location, viewport]);
-    console.log("Available Routes: ", navigation.getState());
     return (
         <>
             <MapSearch data={LocationData} />
@@ -49,7 +48,6 @@ export const MapScreen = ({ navigation }) => {
                 }}
             >
                 {restaurants.map((restaurant) => {
-                    console.log("restaurant data to be passed 67", { item: restaurant })
                     return (
                         <Marker
                             key={restaurant.name}

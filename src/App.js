@@ -9,6 +9,7 @@ import {
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { RestaurantsContextProvider } from "./services/restraunts/restraunts.context";
 import { LocationContextProvider } from "./services/location/location.context";
+import { FavouriteContextProvider } from "./services/favourites/favourite.context";
 import { Navigation } from "./infrastructure/navigation/index";
 
 const App = () => {
@@ -25,11 +26,13 @@ const App = () => {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <LocationContextProvider>
-                    <RestaurantsContextProvider>
-                        <Navigation />
-                    </RestaurantsContextProvider>
-                </LocationContextProvider>
+                <FavouriteContextProvider>
+                    <LocationContextProvider>
+                        <RestaurantsContextProvider>
+                            <Navigation />
+                        </RestaurantsContextProvider>
+                    </LocationContextProvider>
+                </FavouriteContextProvider>
             </ThemeProvider>
             <ExpoStatusBar style="auto" />
         </>
