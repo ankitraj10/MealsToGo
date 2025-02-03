@@ -26,7 +26,6 @@ const MapCallBackImage = styled(Image)`
 `;
 
 export const MapCallout = ({ restaurant, navigation }) => {
-  console.log("photos", restaurant);
   return (
     // <Callout tooltip >
     <MapCallbackContainer>

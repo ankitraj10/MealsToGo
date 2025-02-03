@@ -1,23 +1,24 @@
 import React, { createContext, useState } from "react";
 
-export const FavouritesContext = createContext();
+export const FavouriteContext = createContext();
 
-export const FavouritesContextProvider = ({ children }) => {
+export const FavouriteContextProvider = ({ children }) => {
     const [favourites, setFavourites] = useState([]);
 
     const add = (restaurant) => {
-        setFavourites([...favourites, restaurant]);
+
+        setFavourites([restaurant, ...favourites]);
     };
 
     const remove = (restaurant) => {
-        const newFavourites = favourites.filter(
+        const newRestaurant = favourites.filter(
             (x) => x.placeId !== restaurant.placeId
         );
-
-        setFavourites(newFavourites);
+        setFavourites(newRestaurant);
     };
+    console.log("favourite", favourites)
     return (
-        <FavouritesContext.Provider
+        <FavouriteContext.Provider
             value={{
                 favourites,
                 addToFavourites: add,
@@ -25,6 +26,6 @@ export const FavouritesContextProvider = ({ children }) => {
             }}
         >
             {children}
-        </FavouritesContext.Provider>
+        </FavouriteContext.Provider>
     );
 };

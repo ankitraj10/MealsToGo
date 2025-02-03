@@ -7,6 +7,7 @@ import styled from 'styled-components/native';
 import { Spacer } from "../../../components/spacer.component";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { RestaurantsContext } from "../../../services/restraunts/restraunts.context";
+import { FavouriteContext } from "../../../services/favourites/favourite.context";
 import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 import { LocationContext } from "../../../services/location/location.context";
 
@@ -30,7 +31,7 @@ margin-bottom: ${(props) => props.theme.space[5]};
 
 export const ReastaurantsScreen = ({ navigation }) => {
     const { restaurants, isLoading, error, loadRestaurants } = useContext(RestaurantsContext);
-    const LocationData = useContext(LocationContext)
+    const LocationData = useContext(LocationContext);
 
     useEffect(() => {
         loadRestaurants(LocationData.location);
@@ -49,8 +50,6 @@ export const ReastaurantsScreen = ({ navigation }) => {
                 <RestaurantFlatList
                     data={restaurants}
                     renderItem={(item, index) => {
-                        console.log("restaurant data to be passed", item)
-                        console.log("restaurant data to be passed 23", restaurants[index])
                         return <TouchableOpacity onPress={() => navigation.navigate("RestaurantDetails", { restaurantsDetail: item, data: restaurants[index] })}><Spacer variant='bottom' size='large' /><RestaurantInfoCard restaurant={item} /></TouchableOpacity>
                     }}
                     keyExtractor={(item) => item.name}
