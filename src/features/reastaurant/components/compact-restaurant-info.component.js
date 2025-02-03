@@ -26,14 +26,14 @@ const Item = styled.View`
 const isAndroid = Platform.OS === "android";
 
 export const CompactRestaurantInfo = ({ restaurant, navigation }) => {
-    const Image = isAndroid ? CompactWebview : CompactImage;
-
-    return (
-        <Item >
-            <Image source={{ uri: restaurant.photos[0] }} />
-            <Text center variant="caption" numberOfLines={3}>
-                {restaurant.name}
-            </Text>
-        </Item>
-    );
+  const Image = isAndroid ? CompactWebview : CompactImage;
+  console.log("favorites 98", restaurant, restaurant.photos[0])
+  return (
+    <Item >
+      <Image source={{ uri: restaurant.photos[0] }} />
+      <Text center variant="caption" numberOfLines={3}>
+        {restaurant.name}
+      </Text>
+    </Item>
+  );
 };

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, FlatList, Pressable, TouchableOpacity } from 'react-native';
 import { Search } from "../components/search.component"
 import { Searchbar } from "react-native-paper";
@@ -10,6 +10,7 @@ import { RestaurantsContext } from "../../../services/restraunts/restraunts.cont
 import { FavouriteContext } from "../../../services/favourites/favourite.context";
 import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 import { LocationContext } from "../../../services/location/location.context";
+import { FavouriteBar } from "../../../components/favourite/favourite-bar.component";
 
 const RestaurantList = styled(View)`
   padding: ${(props) => props.theme.space[1]};
@@ -30,8 +31,10 @@ margin-bottom: ${(props) => props.theme.space[5]};
 `
 
 export const ReastaurantsScreen = ({ navigation }) => {
+    const [isToggle, setIsToggle] = useState(false)
     const { restaurants, isLoading, error, loadRestaurants } = useContext(RestaurantsContext);
     const LocationData = useContext(LocationContext);
+    const { favourites } = useContext(FavouriteContext);
 
     useEffect(() => {
         loadRestaurants(LocationData.location);
@@ -45,7 +48,12 @@ export const ReastaurantsScreen = ({ navigation }) => {
 
     return (
         <SafeArea  >
-            <Search data={LocationData} />
+            <Search
+                data={LocationData}
+                favouriteToggle={isToggle}
+                favouriteIsToggle={() => setIsToggle(!isToggle)}
+            />
+            {isToggle && <FavouriteBar favourites={favourites} />}
             <RestaurantList >
                 <RestaurantFlatList
                     data={restaurants}
