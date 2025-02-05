@@ -15,9 +15,9 @@ export const FavouriteBar = ({ favourites, onNavigate }) => {
     }
     return (
         <FavouritesWrapper>
-            <Spacer variant="left.large">
+            <View variant="left.large">
                 <Text variant="caption">Favourites</Text>
-            </Spacer>
+            </View>
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {favourites.map((restaurant) => {
@@ -26,13 +26,7 @@ export const FavouriteBar = ({ favourites, onNavigate }) => {
                     return (
                         <>
                             <Spacer key={key} variant="left" size="medium"> </Spacer>
-                            <TouchableOpacity
-                                onPress={() =>
-                                    onNavigate("RestaurantDetail", {
-                                        restaurant,
-                                    })
-                                }
-                            >
+                            <TouchableOpacity>
                                 <CompactRestaurantInfo restaurant={restaurant} />
                             </TouchableOpacity>
                         </>
