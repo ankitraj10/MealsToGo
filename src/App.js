@@ -10,6 +10,7 @@ import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { RestaurantsContextProvider } from "./services/restraunts/restraunts.context";
 import { LocationContextProvider } from "./services/location/location.context";
 import { FavouriteContextProvider } from "./services/favourites/favourite.context";
+import { AuthenticationContextProvider } from "./services/authentication/authentication.context";
 import { Navigation } from "./infrastructure/navigation/index";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -58,13 +59,15 @@ const App = () => {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <FavouriteContextProvider>
-                    <LocationContextProvider>
-                        <RestaurantsContextProvider>
-                            <Navigation />
-                        </RestaurantsContextProvider>
-                    </LocationContextProvider>
-                </FavouriteContextProvider>
+                <AuthenticationContextProvider>
+                    <FavouriteContextProvider>
+                        <LocationContextProvider>
+                            <RestaurantsContextProvider>
+                                <Navigation />
+                            </RestaurantsContextProvider>
+                        </LocationContextProvider>
+                    </FavouriteContextProvider>
+                </AuthenticationContextProvider>
             </ThemeProvider>
             <ExpoStatusBar style="auto" />
         </>
