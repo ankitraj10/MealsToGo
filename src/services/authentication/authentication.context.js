@@ -7,6 +7,7 @@ export const AuthenticationContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const onLogin = (email, password) => {
         loginRequest(email, password).then((user) => {
@@ -24,7 +25,8 @@ export const AuthenticationContextProvider = ({ children }) => {
                 user,
                 isLoading,
                 error,
-                onLogin
+                onLogin,
+                isAuthenticated
             }}
         >
             {children}
