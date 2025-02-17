@@ -1,13 +1,30 @@
 import React, { useState, createContext } from "react";
-import { loginRequest, userRegistration } from "./authentication.service"
+import { loginRequest, userRegistration } from "./authentication.service";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export const AuthenticationContext = createContext();
+
+
 
 export const AuthenticationContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const uid = user.uid;
+            setUser(user);
+            setIsLoading(false);
+            setIsAuthenticated(true);
+        } else {
+            setUser(null);
+            setIsLoading(false);
+            setIsAuthenticated(false);
+        }
+    });
 
     const getErrorMessage = (errorCode) => {
         console.log("error message", errorCode)
@@ -55,6 +72,18 @@ export const AuthenticationContextProvider = ({ children }) => {
         } else {
             setError("Please enter same password");
         }
+    }
+
+    const onLogout = () => {
+
+        const auth = getAuth();
+        signOut(auth).then(() => {
+            setUser(null);
+            setIsLoading(false);
+            setIsAuthenticated(false);
+        }).catch((error) => {
+
+        });
     }
 
     return (
